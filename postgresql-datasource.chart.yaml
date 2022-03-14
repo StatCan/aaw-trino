@@ -1,0 +1,16 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: postgresql-datasource
+  namespace: kube-system
+spec:
+  repo: https://charts.bitnami.com/bitnami
+  chart: postgresql
+  version: 11.0.6
+  targetNamespace: postgresql-datasource
+  valuesContent: |-
+    auth:
+      enablePostgresUser: false
+      username: trino
+      password: Q1zx10EMuU21aEgAZm4kJm9DrD0EjjzIYE8y01Ea
+      database: autos

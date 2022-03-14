@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: adminer
+  namespace: postgresql-datasource
+  labels:
+    name: adminer
+spec:
+  containers:
+  - name: adminer
+    image: adminer
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "200m"
+    ports:
+      - containerPort: 8080

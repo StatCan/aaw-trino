@@ -1,0 +1,33 @@
+server:
+  config:
+    memory:
+      heapHeadroomPerNode: 128MB # ONLY for local development!
+    query:
+      maxMemory: 512MB # ONLY for local development!
+      maxMemoryPerNode: 128MB # ONLY for local development!
+  jvm:
+    maxHeapSize: 1G # ONLY for local development!
+  # NOTE: Possibly required on the workers as well, but
+  # I don't think so.
+  coordinatorExtraConfig: |
+    http-server.process-forwarded=true
+    http-server.authentication.type=JWT
+    http-server.authentication.jwt.key-file=http://localhost:8090/openid/v1/jwks
+    http-server.authentication.jwt.user-mapping.pattern=^system:serviceaccount:([^:]+):default$
+additionalCatalogs:
+  # TODO: Passwords should be secrets. :)
+  postgresql: |
+    connector.name=postgresql
+    connection-url=jdbc:postgresql://postgresql-datasource.postgresql-datasource:5432/autos
+    connection-user=trino
+    connection-password=Q1zx10EMuU21aEgAZm4kJm9DrD0EjjzIYE8y01Ea
+  minio: |
+    connector.name=hive-hadoop2
+    hive.metastore.uri=thrift://hive-metastore.hive-system:9083
+    hive.s3.path-style-access=true
+    hive.s3.endpoint=http://minio.minio-system:9000
+    hive.s3.aws-access-key=trino
+    hive.s3.aws-secret-key=Q1zx10EMuU21aEgAZm4kJm9DrD0EjjzIYE8y01Ea
+    hive.non-managed-table-writes-enabled=true
+    hive.s3select-pushdown.enabled=true
+    hive.storage-format=ORC

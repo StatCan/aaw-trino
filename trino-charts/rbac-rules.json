@@ -1,0 +1,49 @@
+// NOTE: This is just an example I used when testing things out in a Docker
+// Compose setup.
+{
+  "catalogs": [
+    {
+      "user": "system_user|trino",
+      "allow": "all"
+    },
+    {
+      "user": "brendan",
+      "catalog": "postgres",
+      "allow": "read-only"
+    }
+  ],
+  "tables": [
+    {
+      "user": "system_user",
+      "privileges": ["SELECT"]
+    },
+    {
+      "user": "trino",
+      "privileges": ["SELECT", "INSERT", "DELETE", "OWNERSHIP"]
+    },
+    {
+      "user": "brendan",
+      "privileges": ["SELECT"],
+      "catalog": "postgres",
+      "schema": "flights",
+      "table": "airports",
+      "filter": "iso_country = 'CA'",
+      "filter_environment": {
+        "user": "system_user"
+      },
+      "columns": [
+        {
+          "name": "iata_code",
+          "allow": false
+        },
+        {
+          "name": "municipality",
+          "mask": "substring(municipality, 1, length(municipality) - 1) || 'X'",
+          "mask_environment": {
+            "user": "system_user"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+# NOTE: This is old! Use `helm` directly with the (modified) Trino chart under
+# submodules/ and trino.values.yaml for values.
+
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: trino
+  namespace: kube-system
+spec:
+  repo: https://trinodb.github.io/charts/
+  chart: trino
+  version: 0.4.0
+  targetNamespace: trino-system
