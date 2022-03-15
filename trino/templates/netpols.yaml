@@ -4,8 +4,6 @@
 
 # TODO: Make sure netpols are in place for Hive as well
 #       (It's in a different namespace.)
-
-
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
@@ -16,25 +14,23 @@ spec:
   policyTypes:
     - Ingress
     - Egress
-
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: allow-same-namespace
   namespace: trino-system
-spec:egress-hive-allow
+spec:
   podSelector: {}
   policyTypes:
     - Ingress
     - Egress
   egress:
-    - to:
-        - podSelector: {}
+  - to:
+    - podSelector: {}
   ingress:
-    - from:
-        - podSelector: {}
-
+  - from:
+    - podSelector: {}
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -49,7 +45,6 @@ spec:
     - Ingress
   ingress:
     - {}
-
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -65,7 +60,6 @@ spec:
         - namespaceSelector:
             matchLabels:
               kubernetes.io/metadata.name: hive-system
-
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -86,7 +80,6 @@ spec:
         - namespaceSelector:
             matchLabels:
               kubernetes.io/metadata.name: minio-system
-
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
