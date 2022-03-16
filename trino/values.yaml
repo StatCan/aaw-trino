@@ -39,7 +39,7 @@ server:
         path: ""
   # NOTE: Possibly required on the workers as well, but
   # I don't think so.
-  coordinatorExtraConfig: {}
+  coordinatorExtraConfig: ""
     # http-server.process-forwarded=true
     # http-server.authentication.type=JWT
     # http-server.authentication.jwt.key-file=http://localhost:8090/openid/v1/jwks
