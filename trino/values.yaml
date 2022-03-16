@@ -10,7 +10,7 @@ image:
 
 server:
   jvm:
-    maxHeapSize: 8G # ONLY for local development!
+    maxHeapSize: 1G # ONLY for local development!
     gcMethod:
       type: "UseG1GC"
       g1:
@@ -27,8 +27,8 @@ server:
     memory:
       heapHeadroomPerNode: 1GB # ONLY for local development!
     query:
-      maxMemory: 4GB # ONLY for local development!
-      maxMemoryPerNode: 1GB # ONLY for local development!
+      maxMemory: 512MB # ONLY for local development!
+      maxMemoryPerNode: 128MB # ONLY for local development!
     path: /etc/trino
     http:
       port: 8080
@@ -60,6 +60,25 @@ additionalConfigProperties: {}
 additionalLogProperties: {}
 
 additionalExchangeManagerProperties: {}
+
+additionalCatalogs:
+  # TODO: Passwords should be secrets. :)
+  postgresql: |
+    connector.name=postgresql
+    connection-url=jdbc:postgresql://postgresql-datasource.postgresql-datasource:5432/autos
+    connection-user=trino
+    connection-password=Q1zx10EMuU21aEgAZm4kJm9DrD0EjjzIYE8y01Ea
+  minio: |
+    connector.name=hive-hadoop2
+    hive.metastore.uri=thrift://hive-metastore.hive-system:9083
+    hive.s3.path-style-access=true
+    hive.s3.endpoint=http://minio.minio-system:9000
+    hive.s3.aws-access-key=trino
+    hive.s3.aws-secret-key=Q1zx10EMuU21aEgAZm4kJm9DrD0EjjzIYE8y01Ea
+    hive.non-managed-table-writes-enabled=true
+    hive.s3select-pushdown.enabled=true
+    hive.storage-format=ORC
+
 
 # Array of EnvVar (https://v1-18.docs.kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#envvar-v1-core)
 env: []
