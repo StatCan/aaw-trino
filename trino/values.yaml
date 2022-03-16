@@ -37,11 +37,13 @@ server:
       port: 8443
       keystore:
         path: ""
-  coordinatorExtraConfig:
-    http-server.process-forwarded=true
-    http-server.authentication.type=JWT
-    http-server.authentication.jwt.key-file=http://localhost:8090/openid/v1/jwks
-    http-server.authentication.jwt.user-mapping.pattern=^system:serviceaccount:([^:]+):default$
+  # NOTE: Possibly required on the workers as well, but
+  # I don't think so.
+  coordinatorExtraConfig: {}
+    # http-server.process-forwarded=true
+    # http-server.authentication.type=JWT
+    # http-server.authentication.jwt.key-file=http://localhost:8090/openid/v1/jwks
+    # http-server.authentication.jwt.user-mapping.pattern=^system:serviceaccount:([^:]+):default$
   exchangeManager:
     name: "filesystem"
     baseDir: "/tmp/trino-local-file-system-exchange-manager"
