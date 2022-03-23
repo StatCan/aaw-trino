@@ -7,15 +7,11 @@ helm-deploy:
 helm-install: helm-deploy helm-all
 
 helm-hive: helm-repo-bitnami
-	kubectl create ns hive-system
-	kubectl label namespace hive-system istio-injection=enabled
 	helm dependency build ./hive-metastore
 	helm upgrade --install -n hive-system \
 		hive-metastore ./hive-metastore
 
 helm-minio: helm-repo-bitnami
-	kubectl create ns minio-system
-	kubectl label namespace minio-system istio-injection=enabled
 	helm upgrade --install \
 		--repo https://charts.bitnami.com/bitnami \
 		-n minio-system \
@@ -25,8 +21,6 @@ helm-repo-bitnami:
 	helm repo add bitnami https://charts.bitnami.com/bitnami
 
 helm-trino:
-	kubectl create ns trino-system
-	kubectl label namespace trino-system istio-injection=enabled
 	helm upgrade --install -n trino-system \
 		trino ./trino
 
