@@ -1,4 +1,4 @@
-helm-all: cilium-install helm-hive helm-minio helm-trino helm-namespace-controller
+helm-all: helm-hive helm-minio helm-trino helm-namespace-controller
 
 
 helm-deploy:
@@ -25,7 +25,7 @@ helm-trino:
 		trino ./trino
 
 helm-namespace-controller:
-	kind load docker-image statcan/namespace-controller:0.0.1 --name goku
+	kind load docker-image statcan/namespace-controller:0.0.1 --name trino
 	helm repo add statcan https://statcan.github.io/charts
 	helm upgrade --install -n trino-system stable statcan/namespace-controller
 
