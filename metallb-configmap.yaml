@@ -1,3 +1,6 @@
+# Run command to get network address (may differ)
+# docker network inspect -f '{{.IPAM.Config}}' kind
+
 apiVersion: v1
 kind: ConfigMap
 metadata:

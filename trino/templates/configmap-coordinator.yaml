@@ -57,6 +57,8 @@ data:
     http-server.https.port={{ .Values.server.config.https.port }}
     http-server.https.keystore.path={{ .Values.server.config.https.keystore.path }}
   {{- end }}
+
+  # Trino config properties for JWT Auth
     # http-server.process-forwarded=true
     # http-server.authentication.type=JWT
     # http-server.authentication.jwt.key-file=http://localhost:8090/openid/v1/jwks

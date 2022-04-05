@@ -20,6 +20,7 @@ spec:
         app: {{ template "trino.name" . }}
         release: {{ .Release.Name }}
         component: coordinator
+        network.statcan.gc.ca/allow-kube-apiserver: "true"
     spec:
       serviceAccountName: {{ include "trino.serviceAccountName" . }}
       {{- with .Values.securityContext }}
@@ -34,13 +35,13 @@ spec:
         - name: catalog-volume
           configMap:
             name: {{ template "trino.catalog" . }}
-        # - name: nginx-conf
-        #   configMap:
-        #     name: nginx-conf
-        # - name: nginx-init
-        #   configMap:
-        #     name: nginx-init
-        #     defaultMode: 0755
+        - name: nginx-conf
+          configMap:
+            name: nginx-conf
+        - name: nginx-init
+          configMap:
+            name: nginx-init
+            defaultMode: 0755
       {{- if .Values.initContainers.coordinator }}
       initContainers:
       {{-  tpl (toYaml .Values.initContainers.coordinator) . | nindent 6 }}
