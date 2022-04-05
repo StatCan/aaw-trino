@@ -31,8 +31,6 @@ helm-trino:
 
 # This image needs to exist in the local docker and be tagged by this name to avoid pull image back-off
 helm-namespace-controller:
-# This is the name expected by the chart
-# This image needs to exist in the local docker and be tagged by this name to avoid the pull image back-off
 	kind load docker-image statcan/namespace-controller:0.0.1 --name trino
 	helm repo add statcan https://statcan.github.io/charts
 	helm upgrade --install -n trino-system stable statcan/namespace-controller
