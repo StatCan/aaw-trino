@@ -92,6 +92,9 @@ initContainers: {}
   #     image: busybox:1.28
   #     command: ['sh', '-c', 'echo The worker is running! && sleep 3600']
 
+labels:
+  allowTrue: true
+
 securityContext:
   runAsUser: 1000
   runAsGroup: 1000
@@ -128,4 +131,3 @@ serviceAccount:
   annotations: {}
 
 secretMounts: []
-
