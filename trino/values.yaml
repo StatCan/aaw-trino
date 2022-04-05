@@ -10,12 +10,12 @@ image:
 
 server:
   jvm:
-    maxHeapSize: 8G # ONLY for local development!
+    maxHeapSize: 4G # ONLY for local development!
     gcMethod:
       type: "UseG1GC"
       g1:
         heapRegionSize: "32M"
-  workers: 2
+  workers: 1
   node:
     environment: production
     dataDir: /data/trino
@@ -27,7 +27,7 @@ server:
     memory:
       heapHeadroomPerNode: 1GB # ONLY for local development!
     query:
-      maxMemory: 4GB # ONLY for local development!
+      maxMemory: 2GB # ONLY for local development!
       maxMemoryPerNode: 1GB # ONLY for local development!
     path: /etc/trino
     http:
@@ -39,11 +39,7 @@ server:
         path: ""
   # NOTE: Possibly required on the workers as well, but
   # I don't think so.
-  coordinatorExtraConfig: ""
-    # http-server.process-forwarded=true
-    # http-server.authentication.type=JWT
-    # http-server.authentication.jwt.key-file=http://localhost:8090/openid/v1/jwks
-    # http-server.authentication.jwt.user-mapping.pattern=^system:serviceaccount:([^:]+):default$
+  coordinatorExtraConfig: "" # todo: fix helm-values
   exchangeManager:
     name: "filesystem"
     baseDir: "/tmp/trino-local-file-system-exchange-manager"
