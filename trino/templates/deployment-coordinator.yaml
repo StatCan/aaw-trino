@@ -16,13 +16,13 @@ spec:
       component: coordinator
   template:
     metadata:
-     {{- with .Values.securityContext }}
       labels:
         app: {{ template "trino.name" . }}
         release: {{ .Release.Name }}
         component: coordinator
-        network.statcan.gc.ca/allow-kube-apiserver: {{ .allowTrue }}
-      {{- end}}
+        {{- if .Values.labels.allowTrue }}
+        network.statcan.gc.ca/allow-kube-apiserver: "true"
+        {{- end }}
     spec:
       serviceAccountName: {{ include "trino.serviceAccountName" . }}
       {{- with .Values.securityContext }}
