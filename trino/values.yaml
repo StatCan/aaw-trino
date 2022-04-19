@@ -64,22 +64,42 @@ additionalCatalogs:
   postgresql: |
     connector.name=postgresql
     connection-url=jdbc:postgresql://postgresql-datasource.postgresql-datasource:5432/autos
-    connection-user=trino
-    connection-password=Q1zx10EMuU21aEgAZm4kJm9DrD0EjjzIYE8y01Ea
+    connection-user=${ENV:TRINO_USERNAME}
+    connection-password=${ENV:TRINO_PASSWORD}
   minio: |
     connector.name=hive-hadoop2
     hive.metastore.uri=thrift://hive-metastore.hive-system:9083
     hive.s3.path-style-access=true
     hive.s3.endpoint=http://minio.minio-system:9000
-    hive.s3.aws-access-key=admin
-    hive.s3.aws-secret-key=Q1zx10EMuU21aEgAZm4kJm9DrD0EjjzIYE8y01Ea
+    hive.s3.aws-access-key=${ENV:MINIO_USERNAME}
+    hive.s3.aws-secret-key=${ENV:MINIO_PASSWORD}
     hive.non-managed-table-writes-enabled=true
     hive.s3select-pushdown.enabled=true
     hive.storage-format=ORC
 
 
 # Array of EnvVar (https://v1-18.docs.kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#envvar-v1-core)
-env: []
+env:
+  - name: MINIO_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: trino-minio-secret
+        key: user
+  - name: MINIO_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: trino-minio-secret
+        key: password
+  - name: TRINO_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: trino-secret
+        key: user
+  - name: TRINO_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: trino-secret
+        key: password
 
 initContainers: {}
   # coordinator:
