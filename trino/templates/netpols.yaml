@@ -116,13 +116,11 @@ spec:
     - Egress
   egress:
   - to:
-    - podSelector:
-      - namespaceSelector:
+    - namespaceSelector:
         matchLabels:
-        kubernetes.io/metadata.name: trino-system
+          kubernetes.io/metadata.name: trino-system
   ingress:
   - from:
-    - podSelector:
-      - namespaceSelector:
+    - namespaceSelector:
         matchLabels:
-        kubernetes.io/metadata.name: trino-system
+          kubernetes.io/metadata.name: trino-system
