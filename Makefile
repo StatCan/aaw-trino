@@ -1,7 +1,8 @@
 # deploy cluster and all resources
-helm-all:  helm-deploy cilium-install install-metallb install-istio \
-	helm-hive helm-minio helm-trino secret-creation istio-injection helm-namespace-controller install-gateway
+helm-all:  helm-deploy cilium-install create-ns install-istio install-metallb  \
+	secret-creation helm-hive helm-minio helm-namespace-controller helm-trino install-gateway cert-secret
 
+helm-minimal:  install-metallb istio-injection install-gateway
 
 # This is the secret password for trino and minio for LOCAL DEVELOPMENT
 secret-creation:
@@ -11,15 +12,26 @@ secret-creation:
 helm-deploy:
 	kind create cluster --name trino
 
+create-ns:
+	kubectl label --overwrite namespace default istio-injection=enabled
+
+	kubectl create ns trino-system
+	kubectl label namespace trino-system istio-injection=enabled
+
+	kubectl create ns hive-system
+	kubectl label namespace hive-system istio-injection=enabled
+
+	kubectl create ns minio-system
+	kubectl label namespace minio-system istio-injection=enabled
 
 helm-hive: helm-repo-bitnami
 	helm dependency build ./hive-metastore
-	helm upgrade --install --create-namespace -n hive-system \
+	helm upgrade --install -n hive-system \
 		hive-metastore ./hive-metastore
 
 
 helm-minio: helm-repo-bitnami
-	helm upgrade --create-namespace --install \
+	helm upgrade --install \
 		--repo https://charts.bitnami.com/bitnami \
 		-n minio-system \
 		minio ./minio
@@ -30,7 +42,7 @@ helm-repo-bitnami:
 
 
 helm-trino:
-	helm upgrade --create-namespace --install -n trino-system \
+	helm upgrade --install -n trino-system \
 		trino ./trino
 
 
@@ -58,9 +70,6 @@ cilium-install:
 	rm cilium-linux-amd64.tar.gz
 	cilium install
 
-istio-injection:
-	chmod +x ./istio-injection.sh
-	./istio-injection.sh
 
 
 install-metallb:

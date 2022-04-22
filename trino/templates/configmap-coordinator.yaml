@@ -47,7 +47,6 @@ data:
     query.max-memory={{ .Values.server.config.query.maxMemory }}
     query.max-memory-per-node={{ .Values.server.config.query.maxMemoryPerNode }}
     memory.heap-headroom-per-node={{ .Values.server.config.memory.heapHeadroomPerNode }}
-    discovery-server.enabled=true
     discovery.uri=http://localhost:{{ .Values.service.port }}
   {{- range $configValue := .Values.additionalConfigProperties }}
     {{ $configValue }}
@@ -57,14 +56,7 @@ data:
     http-server.https.port={{ .Values.server.config.https.port }}
     http-server.https.keystore.path={{ .Values.server.config.https.keystore.path }}
   {{- end }}
-
-  # Trino config properties for JWT Auth
-    # http-server.process-forwarded=true
-    # http-server.authentication.type=JWT
-    # http-server.authentication.jwt.key-file=http://localhost:8090/openid/v1/jwks
-    # http-server.authentication.jwt.user-mapping.pattern=^system:serviceaccount:([^:]+):default$
-  # {{ .Values.server.coordinatorExtraConfig | indent 4 }}
-
+{{ .Values.server.coordinatorExtraConfig | indent 4 }}
   exchange-manager.properties: |
     exchange-manager.name={{ .Values.server.exchangeManager.name }}
     exchange.base-directory={{ .Values.server.exchangeManager.baseDir }}
@@ -77,5 +69,3 @@ data:
   {{- range $configValue := .Values.additionalLogProperties }}
     {{ $configValue }}
   {{- end }}
-
----
