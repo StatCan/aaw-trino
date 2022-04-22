@@ -4,6 +4,11 @@ helm-all:  helm-deploy cilium-install create-ns install-istio install-metallb  \
 
 helm-minimal:  install-metallb istio-injection install-gateway
 
+# This is the secret password for trino and minio for LOCAL DEVELOPMENT
+secret-creation:
+	kubectl create secret generic trino-secret --from-literal=user=trino --from-literal=password=Q1zx10EMuU21aEgAZm4kJm9DrD0EjjzIYE8y01Ea --namespace=trino-system
+	kubectl create secret generic trino-minio-secret --from-literal=user=admin --from-literal=password=Q1zx10EMuU21aEgAZm4kJm9DrD0EjjzIYE8y01Ea --namespace=trino-system
+
 helm-deploy:
 	kind create cluster --name trino
 
