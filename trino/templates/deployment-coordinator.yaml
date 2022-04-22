@@ -20,7 +20,9 @@ spec:
         app: {{ template "trino.name" . }}
         release: {{ .Release.Name }}
         component: coordinator
+        {{- if .Values.labels.allowTrue }}
         network.statcan.gc.ca/allow-kube-apiserver: "true"
+        {{- end }}
     spec:
       serviceAccountName: {{ include "trino.serviceAccountName" . }}
       {{- with .Values.securityContext }}
@@ -82,25 +84,25 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-        # - name: {{ .Chart.Name }}-jwks-client
-        #   image: nginxinc/nginx-unprivileged:1.20-alpine
-        #   securityContext:
-        #     runAsUser: 101
-        #   resources:
-        #     limits:
-        #       memory: "128Mi"
-        #       cpu: "100m"
-        #   ports:
-        #     - containerPort: 8090
-        #   volumeMounts:
-        #     - name: nginx-conf
-        #       mountPath: /etc/nginx/nginx.conf.tmpl
-        #       subPath: nginx.conf.tmpl
-        #       readOnly: true
-        #     - name: nginx-init
-        #       mountPath: /docker-entrypoint.d/envsubst-conf.sh
-        #       subPath: envsubst-conf.sh
-        #       readOnly: true
+        - name: {{ .Chart.Name }}-jwks-client
+          image: nginxinc/nginx-unprivileged:1.20-alpine
+          securityContext:
+            runAsUser: 101
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "100m"
+          ports:
+            - containerPort: 8090
+          volumeMounts:
+            - name: nginx-conf
+              mountPath: /etc/nginx/nginx.conf.tmpl
+              subPath: nginx.conf.tmpl
+              readOnly: true
+            - name: nginx-init
+              mountPath: /docker-entrypoint.d/envsubst-conf.sh
+              subPath: envsubst-conf.sh
+              readOnly: true
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
