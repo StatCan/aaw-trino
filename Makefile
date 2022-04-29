@@ -56,7 +56,7 @@ helm-namespace-controller:
 install-istio:
 	cd istio-1.7.8/
 	export PATH=$$PWD/bin:$$PATH
-	istioctl install -y
+	istioctl install --set profile=demo
 
 
 #Installed of Cilium is needed to apply container networking

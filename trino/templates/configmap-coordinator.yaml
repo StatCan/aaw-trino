@@ -38,11 +38,11 @@ data:
 
   config.properties: |
     coordinator=true
-{{- if gt (int .Values.server.workers) 0 }}
+  {{- if gt (int .Values.server.workers) 0 }}
     node-scheduler.include-coordinator=false
-{{- else }}
+  {{- else }}
     node-scheduler.include-coordinator=true
-{{- end }}
+  {{- end }}
     http-server.http.port={{ .Values.service.port }}
     query.max-memory={{ .Values.server.config.query.maxMemory }}
     query.max-memory-per-node={{ .Values.server.config.query.maxMemoryPerNode }}
@@ -51,15 +51,12 @@ data:
   {{- range $configValue := .Values.additionalConfigProperties }}
     {{ $configValue }}
   {{- end }}
-  # todo: use helm values
+  {{- range $configValue := .Values.coordinatorExtraConfig }}
+    {{ $configValue }}
   {{- if .Values.server.config.https.enabled }}
     http-server.https.enabled=true
     http-server.https.port={{ .Values.server.config.https.port }}
     http-server.https.keystore.path={{ .Values.server.config.https.keystore.path }}
-    http-server.process-forwarded=true
-    http-server.authentication.type=JWT
-    http-server.authentication.jwt.key-file=http://localhost:8090/openid/v1/jwks
-    http-server.authentication.jwt.user-mapping.pattern=^system:serviceaccount:([^:]+):default$
   {{- end }}
   exchange-manager.properties: |
     exchange-manager.name={{ .Values.server.exchangeManager.name }}
