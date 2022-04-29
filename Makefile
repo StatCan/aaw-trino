@@ -1,8 +1,6 @@
 # deploy cluster and all resources
 helm-all:  helm-deploy cilium-install create-ns install-istio install-metallb  \
-	secret-creation helm-hive helm-minio helm-namespace-controller helm-trino install-gateway cert-secret
-
-helm-minimal:  install-metallb istio-injection install-gateway
+	secret-creation helm-hive helm-minio helm-namespace-controller helm-trino install-gateway cert-secrets
 
 # This is the secret password for trino and minio for LOCAL DEVELOPMENT
 secret-creation:
@@ -58,7 +56,7 @@ helm-namespace-controller:
 install-istio:
 	cd istio-1.7.8/
 	export PATH=$$PWD/bin:$$PATH
-	istioctl install -y
+	istioctl install --set profile=demo
 
 
 #Installed of Cilium is needed to apply container networking
@@ -101,7 +99,8 @@ helm-postgresql-datasource: helm-repo-bitnami
 		postgresql-datasource postgresql
 	kubectl -n postgresql-datasource apply -f adminer-pod.yaml
 
-
+rules:
+	kubectl cp /tmp/rules.json trino-system/trino-coordinator-75b89c686-vdppr:/tmp/ -c trino-coordinator
 # helm-repo-bitnami:
 # 	helm repo add bitnami https://charts.bitnami.com/bitnami
 
