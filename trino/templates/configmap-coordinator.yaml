@@ -53,6 +53,7 @@ data:
   {{- end }}
   {{- range $configValue := .Values.coordinatorExtraConfig }}
     {{ $configValue }}
+  {{- end }}
   {{- if .Values.server.config.https.enabled }}
     http-server.https.enabled=true
     http-server.https.port={{ .Values.server.config.https.port }}
