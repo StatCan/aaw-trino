@@ -38,11 +38,11 @@ data:
 
   config.properties: |
     coordinator=true
-{{- if gt (int .Values.server.workers) 0 }}
+  {{- if gt (int .Values.server.workers) 0 }}
     node-scheduler.include-coordinator=false
-{{- else }}
+  {{- else }}
     node-scheduler.include-coordinator=true
-{{- end }}
+  {{- end }}
     http-server.http.port={{ .Values.service.port }}
     query.max-memory={{ .Values.server.config.query.maxMemory }}
     query.max-memory-per-node={{ .Values.server.config.query.maxMemoryPerNode }}
@@ -51,12 +51,14 @@ data:
   {{- range $configValue := .Values.additionalConfigProperties }}
     {{ $configValue }}
   {{- end }}
+  {{- range $configValue := .Values.coordinatorExtraConfig }}
+    {{ $configValue }}
+  {{- end }}
   {{- if .Values.server.config.https.enabled }}
     http-server.https.enabled=true
     http-server.https.port={{ .Values.server.config.https.port }}
     http-server.https.keystore.path={{ .Values.server.config.https.keystore.path }}
   {{- end }}
-{{ .Values.server.coordinatorExtraConfig | indent 4 }}
   exchange-manager.properties: |
     exchange-manager.name={{ .Values.server.exchangeManager.name }}
     exchange.base-directory={{ .Values.server.exchangeManager.baseDir }}
