@@ -49,9 +49,9 @@ server:
 additionalNodeProperties: {}
 
 additionalJVMConfig: {}
-# todo: implement secret
+# todo: implement terraform gitlab secret
 additionalConfigProperties:
-  - internal-communication.shared-secret=xasYTSzImZevUyxZFSYYWwGypyLOw7HtupIxoAGc6JCtCfXs6MD6DOHWYCd2fa1dB85cN43gYpx5
+  - internal-communication.shared-secret=${ENV:TRINO_SHARED_SECRET}
 coordinatorExtraConfig:
   - http-server.process-forwarded=true
   - http-server.authentication.type=JWT
@@ -101,7 +101,11 @@ env:
       secretKeyRef:
         name: trino-secret
         key: password
-
+  - name: TRINO_SHARED_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: trino-shared-secret
+        key: shared-secret
 initContainers: {}
   # coordinator:
   #   - name: init-coordinator

@@ -6,7 +6,7 @@ helm-all:  helm-deploy cilium-install create-ns install-istio install-metallb  \
 secret-creation:
 	kubectl create secret generic trino-secret --from-literal=user=trino --from-literal=password=Q1zx10EMuU21aEgAZm4kJm9DrD0EjjzIYE8y01Ea --namespace=trino-system
 	kubectl create secret generic trino-minio-secret --from-literal=user=admin --from-literal=password=Q1zx10EMuU21aEgAZm4kJm9DrD0EjjzIYE8y01Ea --namespace=trino-system
-
+	kubectl create secret generic trino-shared-secret --from-literal=shared-secret=xasYTSzImZevUyxZFSYYWwGypyLOw7HtupIxoAGc6JCtCfXs6MD6DOHWYCd2fa1dB85cN43gYpx5 --namespace=trino-system
 helm-deploy:
 	kind create cluster --name trino
 
@@ -54,7 +54,7 @@ helm-namespace-controller:
 #Installation of istio 1.7.8
 # curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.7.8 TARGET_ARCH=x86_64 sh -
 install-istio:
-	cd istio-1.7.8/
+	cd istio-1.10.0/
 	export PATH=$$PWD/bin:$$PATH
 	istioctl install --set profile=demo
 
