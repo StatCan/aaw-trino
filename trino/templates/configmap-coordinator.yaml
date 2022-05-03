@@ -76,20 +76,11 @@ data:
     {
       "tables": [
         {
-          "role": "default",
-          "privileges": ["INSERT", "DELETE", "UPDATE", "OWNERSHIP"]
+          "user": "default",
+          "privileges": ["SELECT", "INSERT", "DELETE", "UPDATE", "OWNERSHIP"]
         }
       ],
       "impersonation": [
-        {
-            "original_role": "default",
-            "new_user": "bob",
-            "allow": false
-        },
-        {
-            "original_role": "default",
-            "new_user": ".*"
-        },
         {
             "original_user": ".*",
             "new_user": "test"
