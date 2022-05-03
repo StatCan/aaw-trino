@@ -71,3 +71,33 @@ data:
   {{- range $configValue := .Values.additionalLogProperties }}
     {{ $configValue }}
   {{- end }}
+
+  rules.json: |
+    {
+      "tables": [
+        {
+          "role": "default",
+          "privileges": ["INSERT", "DELETE", "UPDATE", "OWNERSHIP"]
+        }
+      ],
+      "impersonation": [
+        {
+            "original_role": "default",
+            "new_user": "bob",
+            "allow": false
+        },
+        {
+            "original_role": "default",
+            "new_user": ".*"
+        },
+        {
+            "original_user": ".*",
+            "new_user": "test"
+        }
+      ]
+    }
+
+  access-control.properties: |
+    access-control.name=file
+    security.config-file=/etc/trino/rules.json
+    security.refresh-period=1s
