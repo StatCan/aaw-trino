@@ -8,7 +8,8 @@ create table if not exists minio.people.people (
 )
 with (
   external_location = 's3a://people/',
-  format = 'JSON'
+  format = 'ORC',
+  transactional=true
 );
 
 
@@ -23,7 +24,8 @@ create table if not exists minio.autos.cars (
 )
 with (
   external_location = 's3a://autos/cars',
-  format = 'ORC'
+  format = 'ORC',
+  transactional=true
 );
 
 create table if not exists minio.autos.owners (
