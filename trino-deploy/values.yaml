@@ -6,7 +6,7 @@ image:
   repository: trinodb/trino
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart version.
-  tag: latest
+  tag: 378
 
 server:
   jvm:
@@ -55,9 +55,9 @@ additionalConfigProperties:
 
 coordinatorExtraConfig:
   - http-server.process-forwarded=true
-  # - http-server.authentication.type=JWT
-  # - http-server.authentication.jwt.key-file=http://localhost:8090/openid/v1/jwks
-  # - http-server.authentication.jwt.user-mapping.pattern=^system:serviceaccount:([^:]+):default$
+  - http-server.authentication.type=JWT
+  - http-server.authentication.jwt.key-file=http://localhost:8090/openid/v1/jwks
+  - http-server.authentication.jwt.user-mapping.pattern=^system:serviceaccount:([^:]+):default$
 
 additionalLogProperties: {}
 
