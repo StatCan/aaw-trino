@@ -6,6 +6,6 @@ icon: https://hive.apache.org/images/hive_logo_medium.jpg
 name: hive-metastore
 version: 0.1.0
 dependencies:
-- name: mariadb
-  version: ~10.3.6
+- name: postgresql
+  version: ~10.2.1
   repository: https://charts.bitnami.com/bitnami

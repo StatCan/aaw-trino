@@ -1,14 +1,14 @@
 image:
-  repository: bitsondatadev/hive-metastore
+  repository: bitnami/postgresql
   tag: latest
   pullPolicy: IfNotPresent
 
-mariadb:
-  auth:
-    username: hive
-    database: metastore
-    rootPassword: Q1zx10EMuU21aEgAZm4kJm9DrD0EjjzIYE8y01Ea
-    password: Q1zx10EMuU21aEgAZm4kJm9DrD0EjjzIYE8y01Ea
+postgresql:
+  postgresqlUsername: hive
+  postgresqlPassword: hive
+  postgresqlDatabase: metastore
+  # initdbScriptsConfigMap: hive-metastore-postgresql-init
+
 
 replicas: 1
 resources: {}
