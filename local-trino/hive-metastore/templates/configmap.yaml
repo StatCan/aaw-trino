@@ -30,6 +30,10 @@ data:
           <name>datanucleus.autoCreateSchema</name>
           <value>false</value>
         </property>
+        <property>
+          <name>metastore.try.direct.sql.ddl</name>
+          <value>false</value>
+        </property>
         {{- if not (index .Values.conf "hiveSite" "hive.metastore.uris")  }}
         <property>
           <name>hive.metastore.uris</name>
