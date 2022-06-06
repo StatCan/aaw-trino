@@ -12,7 +12,7 @@ data:
     <configuration>
         <property>
           <name>javax.jdo.option.ConnectionURL</name>
-          <value>jdbc:postgresql://{{ .Release.Name }}-postgresql/metastore</value>
+          <value>jdbc:postgresql://{{ .Release.Name }}-postgresql/metastore?createDatabaseIfNotExist=true</value>
         </property>
         <property>
           <name>javax.jdo.option.ConnectionDriverName</name>
@@ -20,11 +20,11 @@ data:
         </property>
         <property>
           <name>javax.jdo.option.ConnectionUserName</name>
-          <value>{{ .Values.postgresql.postgresqlUsername }}</value>
+          <value>{{ .Values.auth.username }}</value>
         </property>
         <property>
           <name> javax.jdo.option.ConnectionPassword</name>
-          <value>{{ .Values.postgresql.postgresqlPassword }}</value>
+          <value>{{ .Values.auth.password }}</value>
         </property>
         <property>
           <name>datanucleus.autoCreateSchema</name>
