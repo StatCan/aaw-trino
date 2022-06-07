@@ -4,17 +4,12 @@ image:
   pullPolicy: IfNotPresent
 
 postgresql:
-  postgresqlUsername: hive
-  postgresqlPassword: hive
-  postgresqlDatabase: metastore
-  # initdbScriptsConfigMap: hive-metastore-postgresql-init
-
-auth:
-  postgresPassword: hive
-  username: hive
-  password: hive
-  database: metastore
-  existingSecret: ""
+  auth:
+    postgresPassword: hive
+    username: hive
+    password: hive
+    database: metastore
+    existingSecret: ""
 
 
 replicas: 1
