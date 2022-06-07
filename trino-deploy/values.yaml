@@ -55,9 +55,9 @@ additionalConfigProperties:
 
 coordinatorExtraConfig:
   - http-server.process-forwarded=true
-  - http-server.authentication.type=JWT
-  - http-server.authentication.jwt.key-file=http://localhost:8090/openid/v1/jwks
-  - http-server.authentication.jwt.user-mapping.pattern=^system:serviceaccount:([^:]+):default$
+  # - http-server.authentication.type=JWT
+  # - http-server.authentication.jwt.key-file=http://localhost:8090/openid/v1/jwks
+  # - http-server.authentication.jwt.user-mapping.pattern=^system:serviceaccount:([^:]+):default$
 
 additionalLogProperties: {}
 
@@ -72,16 +72,24 @@ additionalCatalogs:
     connection-url=jdbc:postgresql://postgresql-datasource.postgresql-datasource:5432/autos
     connection-user=${ENV:TRINO_USERNAME}
     connection-password=${ENV:TRINO_PASSWORD}
-  minio: |
-    connector.name=hive-hadoop2
+  # minio: |
+  #   connector.name=hive-hadoop2
+  #   hive.metastore.uri=thrift://hive-metastore.hive-system:9083
+  #   hive.s3.path-style-access=true
+  #   hive.s3.endpoint=http://minio.minio-system:9000
+  #   hive.s3.aws-access-key=${ENV:MINIO_USERNAME}
+  #   hive.s3.aws-secret-key=${ENV:MINIO_PASSWORD}
+  #   hive.non-managed-table-writes-enabled=true
+  #   hive.s3select-pushdown.enabled=true
+  #   hive.storage-format=ORC
+  hive: |
+    connector.name=hive
     hive.metastore.uri=thrift://hive-metastore.hive-system:9083
-    hive.s3.path-style-access=true
-    hive.s3.endpoint=http://minio.minio-system:9000
-    hive.s3.aws-access-key=${ENV:MINIO_USERNAME}
-    hive.s3.aws-secret-key=${ENV:MINIO_PASSWORD}
-    hive.non-managed-table-writes-enabled=true
-    hive.s3select-pushdown.enabled=true
     hive.storage-format=ORC
+    hive.azure.wasb-storage-account=${ENV:BLOB_PREMIUM_ACCOUNT_NAME}
+    hive.azure.wasb-access-key=${ENV:BLOB_PREMIUM_ACCESS_KEY}
+#   hive.config.resources=/etc/hadoop/conf/core-site.xml
+
 
 
 # Array of EnvVar (https://v1-18.docs.kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#envvar-v1-core)
@@ -111,6 +119,19 @@ env:
       secretKeyRef:
         name: trino-shared-secret
         key: shared-secret
+  - name: BLOB_PREMIUM_ACCOUNT_NAME
+    valueFrom:
+      secretKeyRef:
+        name: aawdevcc00samgstandard
+        key: azurestorageaccountname 
+  - name: BLOB_PREMIUM_ACCESS_KEY
+    valueFrom:
+      secretKeyRef:
+        name: aawdevcc00samgstandard
+        key: azurestorageaccountkey  
+
+
+
 initContainers: {}
   # coordinator:
   #   - name: init-coordinator
