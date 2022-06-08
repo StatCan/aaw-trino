@@ -1,6 +1,7 @@
+# The image needs to be OUR version, with the schematool initialization and startmetastore calls
 image:
   repository: bitnami/postgresql
-  tag: 10.21.0
+  tag: 10.21.2
   pullPolicy: IfNotPresent
 
 postgresql:
