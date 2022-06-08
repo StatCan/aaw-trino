@@ -1,11 +1,7 @@
 # deploy cluster and all resources
 helm-all:  helm-deploy cilium-install create-ns install-istio install-metallb  \
 	secret-creation helm-hive helm-minio helm-namespace-controller helm-trino install-gateway cert-secrets
-meow:  cilium-install create-ns install-istio install-metallb  \
-	secret-creation helm-hive helm-minio helm-trino install-gateway cert-secrets
-meow2: helm-trino install-gateway cert-secrets
 
-small: create-ns secret-creation helm-hive helm-trino
 # This is the secret password for trino and minio for LOCAL DEVELOPMENT
 secret-creation:
 	kubectl create secret generic trino-secret --from-literal=user=trino --from-literal=password=Q1zx10EMuU21aEgAZm4kJm9DrD0EjjzIYE8y01Ea --namespace=trino-system
@@ -43,9 +39,6 @@ helm-minio: helm-repo-bitnami
 
 helm-repo-bitnami:
 	helm repo add bitnami https://charts.bitnami.com/bitnami
-
-helm-repo-bitnami2022:
-	helm repo add bitnami2022 https://raw.githubusercontent.com/bitnami/charts/eb5f9a9513d987b519f0ecd732e7031241c50328/bitnami
 
 
 helm-trino:
