@@ -5,11 +5,6 @@ create table if not exists minio.people.people (
   name varchar,
   age integer,
   hair varchar
-)
-with (
-  external_location = 's3a://people/',
-  format = 'ORC',
-  transactional=true
 );
 
 

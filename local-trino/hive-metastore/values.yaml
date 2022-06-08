@@ -10,8 +10,6 @@ postgresql:
     username: hive
     password: hive
     database: metastore
-    existingSecret: ""
-
 
 replicas: 1
 resources: {}
