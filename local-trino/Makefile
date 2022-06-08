@@ -27,6 +27,8 @@ helm-hive: helm-repo-bitnami
 	helm upgrade --install -n hive-system \
 		hive-metastore ./hive-metastore
 
+helm-template:
+	helm template hive-metastore ./hive-metastore
 
 helm-minio: helm-repo-bitnami
 	helm upgrade --install \
@@ -56,7 +58,7 @@ helm-namespace-controller:
 install-istio:
 	cd istio-1.10.0/
 	export PATH=$$PWD/bin:$$PATH
-	istioctl install --set profile=demo
+	istioctl install --set profile=demo -y
 
 
 #Installed of Cilium is needed to apply container networking

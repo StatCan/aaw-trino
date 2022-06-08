@@ -1,14 +1,15 @@
+# The image needs to be OUR version, with the schematool initialization and startmetastore calls
 image:
-  repository: bitsondatadev/hive-metastore
-  tag: latest
+  repository: bitnami/postgresql
+  tag: 10.21.2
   pullPolicy: IfNotPresent
 
-mariadb:
+postgresql:
   auth:
+    postgresPassword: hive
     username: hive
+    password: hive
     database: metastore
-    rootPassword: Q1zx10EMuU21aEgAZm4kJm9DrD0EjjzIYE8y01Ea
-    password: Q1zx10EMuU21aEgAZm4kJm9DrD0EjjzIYE8y01Ea
 
 replicas: 1
 resources: {}

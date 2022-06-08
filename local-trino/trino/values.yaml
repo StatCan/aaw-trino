@@ -62,11 +62,6 @@ additionalLogProperties: {}
 additionalExchangeManagerProperties: {}
 
 additionalCatalogs:
-  postgresql: |
-    connector.name=postgresql
-    connection-url=jdbc:postgresql://postgresql-datasource.postgresql-datasource:5432/autos
-    connection-user=${ENV:TRINO_USERNAME}
-    connection-password=${ENV:TRINO_PASSWORD}
   minio: |
     connector.name=hive-hadoop2
     hive.metastore.uri=thrift://hive-metastore.hive-system:9083
