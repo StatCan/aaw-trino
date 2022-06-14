@@ -74,12 +74,6 @@ data:
 
   rules.json: |
     {
-      "tables": [
-        {
-          "user": "default",
-          "privileges": ["SELECT", "INSERT", "DELETE", "UPDATE", "OWNERSHIP"]
-        }
-      ],
       "impersonation": [
         {
             "original_user": ".*",

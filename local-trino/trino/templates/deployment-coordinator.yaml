@@ -31,6 +31,9 @@ spec:
         runAsGroup: {{ .runAsGroup }}
       {{- end }}
       volumes:
+        - name: core-volume
+          configMap:
+            name: core-site
         - name: config-volume
           configMap:
             name: {{ template "trino.coordinator" . }}
@@ -62,6 +65,8 @@ spec:
           env:
             {{- toYaml .Values.env | nindent 12 }}
           volumeMounts:
+            - mountPath: /etc/hadoop/conf
+              name: core-volume
             - mountPath: {{ .Values.server.config.path }}
               name: config-volume
             - mountPath: {{ .Values.server.config.path }}/catalog

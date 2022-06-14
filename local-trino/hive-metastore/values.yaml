@@ -1,7 +1,7 @@
 # The image needs to be OUR version, with the schematool initialization and startmetastore calls
 image:
-  repository: bitnami/postgresql
-  tag: 10.21.2
+  repository: hive-metastore
+  tag: latest
   pullPolicy: IfNotPresent
 
 postgresql:
@@ -18,8 +18,4 @@ conf:
     hive_metastore_uris: thrift://hive-metastore:9083
     # if not set, default hive.metastore.warehouse.dir is default to: "hdfs://{{.Release.Name}}-hdfs:8020/user/hive/warehouse"
     # hive.metastore.warehouse.dir:
-    fs.s3a.impl: org.apache.hadoop.fs.s3a.S3AFileSystem
-    fs.s3a.access.key: admin
-    fs.s3a.secret.key: Q1zx10EMuU21aEgAZm4kJm9DrD0EjjzIYE8y01Ea
-    fs.s3a.endpoint: http://minio.minio-system:9000
-    fs.s3a.path.style.access: true
+    hive.metastore.warehouse.dir: /user/hive/warehouse
