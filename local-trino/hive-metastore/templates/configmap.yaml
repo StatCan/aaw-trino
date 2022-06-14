@@ -11,6 +11,14 @@ data:
     <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
     <configuration>
         <property>
+          <name>metastore.task.threads.always</name>
+          <value>org.apache.hadoop.hive.metastore.events.EventCleanerTask,org.apache.hadoop.hive.metastore.MaterializationsCacheCleanerTask</value>
+        </property>
+        <property>
+          <name>metastore.expression.proxy</name>
+          <value>org.apache.hadoop.hive.metastore.DefaultPartitionExpressionProxy</value>
+        </property>
+        <property>
           <name>javax.jdo.option.ConnectionURL</name>
           <value>jdbc:postgresql://{{ .Release.Name }}-postgresql/metastore?createDatabaseIfNotExist=true</value>
         </property>
@@ -41,14 +49,6 @@ data:
         </property>
       {{- end }}
       {{- if not (index .Values.conf "hiveSite" "hive.metastore.warehouse.dir")  }}
-      <property>
-        <name>metastore.task.threads.always</name>
-        <value>org.apache.hadoop.hive.metastore.events.EventCleanerTask,org.apache.hadoop.hive.metastore.MaterializationsCacheCleanerTask</value>
-      </property>
-      <property>
-        <name>metastore.expression.proxy</name>
-        <value>org.apache.hadoop.hive.metastore.DefaultPartitionExpressionProxy</value>
-      </property>	
     {{- end }}
       {{- if index .Values.conf "hiveSite" }}
       {{- range $key, $value := index .Values.conf "hiveSite" }}
