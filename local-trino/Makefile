@@ -1,6 +1,12 @@
+# For local minimal build
+# Have to build and then load local hive-metastore docker file.
+# Once built run, kind load docker-image hive-metastore:latest
+deploy-minial: helm-deploy create-ns secret-creation helm-hive helm-trino
+
+
 # deploy cluster and all resources
-helm-all:  helm-deploy cilium-install create-ns install-istio install-metallb  \
-	secret-creation helm-hive helm-minio helm-namespace-controller helm-trino install-gateway cert-secrets
+# helm-all:  helm-deploy cilium-install create-ns install-istio install-metallb  \
+# 	secret-creation helm-hive helm-minio helm-namespace-controller helm-trino install-gateway cert-secrets
 
 # This is the secret password for trino and minio for LOCAL DEVELOPMENT
 secret-creation:
@@ -47,14 +53,14 @@ helm-trino:
 
 
 # This image needs to exist in the local docker and be tagged by this name to avoid pull image back-off
-helm-namespace-controller:
-	kind load docker-image statcan/namespace-controller:0.0.1 --name trino
-	helm repo add statcan https://statcan.github.io/charts
-	helm upgrade --install -n trino-system stable statcan/namespace-controller
+# helm-namespace-controller:
+# 	kind load docker-image statcan/namespace-controller:0.0.1 --name trino
+# 	helm repo add statcan https://statcan.github.io/charts
+# 	helm upgrade --install -n trino-system stable statcan/namespace-controller
 
 
-#Installation of istio 1.7.8
-# curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.7.8 TARGET_ARCH=x86_64 sh -
+#Installation of istio 1.10.0
+# curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.10.0 TARGET_ARCH=x86_64 sh -
 install-istio:
 	cd istio-1.10.0/
 	export PATH=$$PWD/bin:$$PATH
@@ -101,8 +107,8 @@ helm-postgresql-datasource: helm-repo-bitnami
 		postgresql-datasource postgresql
 	kubectl -n postgresql-datasource apply -f adminer-pod.yaml
 
-rules:
-	kubectl cp /tmp/rules.json trino-system/trino-coordinator-75b89c686-vdppr:/tmp/ -c trino-coordinator
+# rules:
+# 	kubectl cp /tmp/rules.json trino-system/trino-coordinator-75b89c686-vdppr:/tmp/ -c trino-coordinator
 # helm-repo-bitnami:
 # 	helm repo add bitnami https://charts.bitnami.com/bitnami
 
@@ -118,7 +124,6 @@ rules:
 
 
 .PHONY: \
-	helm-all \
 	helm-hive \
 	helm-minio \
 	helm-postgresql-datasource \
@@ -127,4 +132,5 @@ rules:
 	helm-superset \
 	helm-trino \
 	helm-namespace-controller \
-	helm-deploy
+	helm-deploy \
+	deploy-minimal
