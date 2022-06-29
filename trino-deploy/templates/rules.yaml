@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hive-rules
+  labels:
+    app: trino
+    app.kubernetes.io/managed-by: Helm
+    chart: trino-0.5.0
+    heritage: Helm
+    release: trino
+    role: catalogs
+data:
+  rules.json: |
+    {
+        "schemas": [
+            {
+                "user": "admin",
+                "schema": ".*",
+                "owner": true
+            }
+        ],
+        "tables": [
+            {
+                "user": ".*",
+                "privileges": ["SELECT", "INSERT", "DELETE", "UPDATE", "OWNERSHIP"]
+            }
+        ]
+    }

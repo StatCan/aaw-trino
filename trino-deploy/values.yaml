@@ -72,20 +72,15 @@ additionalCatalogs:
     connection-url=jdbc:postgresql://postgresql-datasource.postgresql-datasource:5432/autos
     connection-user=${ENV:TRINO_USERNAME}
     connection-password=${ENV:TRINO_PASSWORD}
-  # minio: |
-  #   connector.name=hive-hadoop2
-  #   hive.metastore.uri=thrift://hive-metastore.hive-system:9083
-  #   hive.s3.path-style-access=true
-  #   hive.s3.endpoint=http://minio.minio-system:9000
-  #   hive.s3.aws-access-key=${ENV:MINIO_USERNAME}
-  #   hive.s3.aws-secret-key=${ENV:MINIO_PASSWORD}
-  #   hive.non-managed-table-writes-enabled=true
-  #   hive.s3select-pushdown.enabled=true
-  #   hive.storage-format=ORC
+
   hive: |
     connector.name=hive
     hive.metastore.uri=thrift://hive-metastore.hive-system:9083
     hive.storage-format=ORC
+    hive.non-managed-table-writes-enabled=true
+    hive.security=FILE
+    security.config-file=/etc/catalog/rules.json
+    security.refresh-period=1s
     hive.azure.wasb-storage-account=${ENV:BLOB_PREMIUM_ACCOUNT_NAME}
     hive.azure.wasb-access-key=${ENV:BLOB_PREMIUM_ACCESS_KEY}
 #   hive.config.resources=/etc/hadoop/conf/core-site.xml
