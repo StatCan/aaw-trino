@@ -29,9 +29,6 @@ spec:
         # - "/bin/sh"
         # - "-c"
         # - "/opt/hive/bin/hive --service metastore"
-        env:
-          - name: METASTORE_DB_HOSTNAME
-            value: {{ .Release.Name }}-mariadb
         # - name: HADOOP_CLASSPATH
         #   value: /opt/hadoop-2.7.4/share/hadoop/tools/lib/*
         resources:
