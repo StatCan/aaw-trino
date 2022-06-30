@@ -6,7 +6,6 @@ image:
 postgresql:
   auth:
     username: ${ENV:HIVE-POSTGRES-USERNAME}
-    database: postgres
     password: ${ENV:HIVE-POSTGRES-PASSWORD}
 
 replicas: 1

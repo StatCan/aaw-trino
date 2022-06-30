@@ -20,7 +20,7 @@ data:
         </property>
         <property>
           <name>javax.jdo.option.ConnectionURL</name>
-          <value>jdbc:postgresql://aawhive.postgres.database.azure.com:5432/metastore_db?user=hiveadmin@aawhive?sslmode=require</value>
+          <value>jdbc:postgresql://aawhive.postgres.database.azure.com:5432/metastore_db?user=hiveadmin@aawhive?ssl=true?sslmode=require</value>
         </property>
         <property>
           <name>javax.jdo.option.ConnectionDriverName</name>
