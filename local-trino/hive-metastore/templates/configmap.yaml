@@ -20,7 +20,7 @@ data:
         </property>
         <property>
           <name>javax.jdo.option.ConnectionURL</name>
-          <value>jdbc:postgresql://{{ .Release.Name }}-postgresql/metastore?createDatabaseIfNotExist=true</value>
+          <value>jdbc:postgresql://aawhive.postgres.database.azure.com:5432/postgres?user=hiveadmin@aawhive.postgres.database.azure.com?sslmode=require</value>
         </property>
         <property>
           <name>javax.jdo.option.ConnectionDriverName</name>
@@ -28,7 +28,7 @@ data:
         </property>
         <property>
           <name>javax.jdo.option.ConnectionUserName</name>
-          <value>{{ .Values.postgresql.auth.username }}</value>
+          <value>hiveadmin@aawhive.postgres.database.azure.com</value>
         </property>
         <property>
           <name> javax.jdo.option.ConnectionPassword</name>
