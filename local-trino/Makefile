@@ -1,7 +1,7 @@
 # For local minimal build
 # Have to build and then load local hive-metastore docker file.
 # Once built run, kind load docker-image hive-metastore:latest
-deploy-minial: helm-deploy create-ns secret-creation helm-hive helm-trino
+deploy-minimal: helm-deploy create-ns secret-creation helm-hive helm-trino
 
 
 # deploy cluster and all resources
