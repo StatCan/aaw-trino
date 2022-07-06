@@ -1,12 +1,8 @@
 image:
   repository: k8scc01covidacr.azurecr.io/hive-metastore
-  tag: d52e47521768435c67c45300b543ae4c7369b253
+  tag: 4233747d8817f60afb8f5dec7081f03ed7989ac5
   pullPolicy: IfNotPresent
 
-postgresql:
-  auth:
-    username: ${ENV:HIVE-POSTGRES-USERNAME}
-    password: ${ENV:HIVE-POSTGRES-PASSWORD}
 
 replicas: 1
 resources: {}
@@ -14,16 +10,3 @@ conf:
   hiveSite:
     hive_metastore_uris: thrift://hive-metastore:9083
     hive.metastore.warehouse.dir: /user/hive/warehouse
-
-env:
-  - name: HIVE-POSTGRES-PASSWORD
-    valueFrom:
-      secretKeyRef: 
-        name: hive-postgres-credentials 
-        key: HIVE_PSQL_PASSWORD
-
-  - name: HIVE-POSTGRES-USERNAME
-    valueFrom:
-      secretKeyRef: 
-        name: hive-postgres-credentials 
-        key: HIVE_PSQL_USERNAME

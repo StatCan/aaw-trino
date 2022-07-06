@@ -81,9 +81,9 @@ additionalCatalogs:
     hive.security=FILE
     security.config-file=/etc/catalog/rules.json
     security.refresh-period=1s
-    hive.azure.wasb-storage-account=${ENV:BLOB_PREMIUM_ACCOUNT_NAME}
-    hive.azure.wasb-access-key=${ENV:BLOB_PREMIUM_ACCESS_KEY}
-# hive.config.resources=/etc/hadoop/conf/core-site.xml
+    hive.azure.wasb-storage-account=${ENV:BLOB_STANDARD_ACCOUNT_NAME}
+    hive.azure.wasb-access-key=${ENV:BLOB_STANDARD_ACCESS_KEY}
+    hive.config.resources=/etc/hadoop/conf/core-site.xml
 
 
 
@@ -104,17 +104,38 @@ env:
       secretKeyRef:
         name: trino-shared-secret
         key: shared-secret
-  - name: BLOB_PREMIUM_ACCOUNT_NAME
+  - name: BLOB_STANDARD_ACCOUNT_NAME
     valueFrom:
       secretKeyRef:
         name: aawdevcc00samgstandard
         key: azurestorageaccountname 
-  - name: BLOB_PREMIUM_ACCESS_KEY
+  - name: BLOB_STANDARD_ACCESS_KEY
     valueFrom:
       secretKeyRef:
         name: aawdevcc00samgstandard
         key: azurestorageaccountkey  
 
+  - name: BLOB_PREMIUM_ACCOUNT_NAME
+    valueFrom:
+      secretKeyRef:
+        name: aawdevcc00samgpremium
+        key: azurestorageaccountname 
+  - name: BLOB_PREMIUM_ACCESS_KEY
+    valueFrom:
+      secretKeyRef:
+        name: aawdevcc00samgpremium
+        key: azurestorageaccountkey 
+
+  - name: BLOB_PROB_ACCOUNT_NAME
+    valueFrom:
+      secretKeyRef:
+        name: aawdevcc00samgprotb
+        key: azurestorageaccountname 
+  - name: BLOB_PROB_ACCESS_KEY
+    valueFrom:
+      secretKeyRef:
+        name: aawdevcc00samgprotb
+        key: azurestorageaccountkey 
 
 
 initContainers: {}
