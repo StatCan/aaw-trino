@@ -83,22 +83,12 @@ additionalCatalogs:
     security.refresh-period=1s
     hive.azure.wasb-storage-account=${ENV:BLOB_PREMIUM_ACCOUNT_NAME}
     hive.azure.wasb-access-key=${ENV:BLOB_PREMIUM_ACCESS_KEY}
-#   hive.config.resources=/etc/hadoop/conf/core-site.xml
+# hive.config.resources=/etc/hadoop/conf/core-site.xml
 
 
 
 # Array of EnvVar (https://v1-18.docs.kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#envvar-v1-core)
 env:
-  - name: MINIO_USERNAME
-    valueFrom:
-      secretKeyRef:
-        name: trino-minio-secret
-        key: user
-  - name: MINIO_PASSWORD
-    valueFrom:
-      secretKeyRef:
-        name: trino-minio-secret
-        key: password
   - name: TRINO_USERNAME
     valueFrom:
       secretKeyRef:

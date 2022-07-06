@@ -25,6 +25,7 @@ spec:
       - name: metastore
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
+
         # command:
         # - "/bin/sh"
         # - "-c"
@@ -47,8 +48,19 @@ spec:
         #   timeoutSeconds: 2
         volumeMounts:
         - name: hive-config
-          mountPath: /opt/apache-hive-metastore-3.0.0-bin/conf
+          mountPath: /opt/apache-hive-metastore-3.1.3-bin/conf
       volumes:
+      # - name: hive-config
+      #   configMap:
+      #     name: {{ include "hiveMetastore.fullname" . }}
+      # - name: hive-config
+      #   configMap:
+      #     name: hive-connection
       - name: hive-config
-        configMap:
-          name: {{ include "hiveMetastore.fullname" . }}
+        projected:
+          sources:
+          - configMap: 
+              name: {{ include "hiveMetastore.fullname" . }}
+          - configMap:
+              name: hive-connection
+              

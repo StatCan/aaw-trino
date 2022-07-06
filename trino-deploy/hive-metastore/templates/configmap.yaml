@@ -12,7 +12,7 @@ data:
     <configuration>
         <property>
           <name>metastore.task.threads.always</name>
-          <value>org.apache.hadoop.hive.metastore.events.EventCleanerTask,org.apache.hadoop.hive.metastore.MaterializationsCacheCleanerTask</value>
+          <value>org.apache.hadoop.hive.metastore.events.EventCleanerTask</value>
         </property>
         <property>
           <name>metastore.expression.proxy</name>
@@ -31,8 +31,12 @@ data:
           <value>hiveadmin@aawhive.postgres.database.azure.com</value>
         </property>
         <property>
-          <name> javax.jdo.option.ConnectionPassword</name>
-          <value>{{ .Values.postgresql.auth.password }}</value>
+          <name>hive.metastore.db.type</name>
+          <value>postgres</value>
+        </property>
+        <property>
+          <name>hive.metastore.schema.verification</name>
+          <value>true</value>
         </property>
         <property>
           <name>datanucleus.autoCreateSchema</name>

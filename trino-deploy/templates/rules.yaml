@@ -14,7 +14,7 @@ data:
     {
         "schemas": [
             {
-                "user": "admin",
+                "user": ".*",
                 "schema": ".*",
                 "owner": true
             }

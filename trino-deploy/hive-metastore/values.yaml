@@ -1,6 +1,6 @@
 image:
   repository: k8scc01covidacr.azurecr.io/hive-metastore
-  tag: 767768aa5243cd22054badc7115a5abb764f07ba
+  tag: d52e47521768435c67c45300b543ae4c7369b253
   pullPolicy: IfNotPresent
 
 postgresql:
@@ -16,14 +16,14 @@ conf:
     hive.metastore.warehouse.dir: /user/hive/warehouse
 
 env:
-  - name: HIVE-POSTGRES-USERNAME
-    valueFrom:
-      secretKeyRef: 
-        name: hive-postgres-credentials 
-        key: HIVE_PSQL_USERNAME
-
   - name: HIVE-POSTGRES-PASSWORD
     valueFrom:
       secretKeyRef: 
         name: hive-postgres-credentials 
         key: HIVE_PSQL_PASSWORD
+
+  - name: HIVE-POSTGRES-USERNAME
+    valueFrom:
+      secretKeyRef: 
+        name: hive-postgres-credentials 
+        key: HIVE_PSQL_USERNAME
