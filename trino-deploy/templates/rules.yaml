@@ -12,6 +12,13 @@ metadata:
 data:
   rules.json: |
     {
+        "schemas": [
+            {
+                "user": ".*",
+                "schema": ".*",
+                "owner": true
+            }
+        ],
         "tables": [
             {
                 "user": ".*",
