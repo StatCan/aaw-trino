@@ -16,12 +16,10 @@ data:
           <name>fs.azure.account.key.${ENV:BLOB_STANDARD_ACCOUNT_NAME}.blob.core.windows.net</name>
           <value>${ENV:BLOB_STANDARD_ACCESS_KEY}</value>
       </property>
-
       <property>
-          <name>fs.azure.account.key.${ENV:BLOB_PROTB_ACCOUNT_NAME}.blob.core.windows.net</name>
-          <value>${ENV:BLOB_PROTB_ACCESS_KEY}</value>
+          <name>fs.azure.account.key.${ENV:BLOB_PROB_ACCOUNT_NAME}.blob.core.windows.net</name>
+          <value>${ENV:BLOB_PROB_ACCESS_KEY}</value>
       </property>
-
       <property>
           <name>fs.azure.account.key.${ENV:BLOB_PREMIUM_ACCOUNT_NAME}.blob.core.windows.net</name>
           <value>${ENV:BLOB_PREMIUM_ACCESS_KEY}</value>

@@ -112,7 +112,6 @@ env:
       secretKeyRef:
         name: aawdevcc00samgstandard
         key: azurestorageaccountkey  
-
   - name: BLOB_PREMIUM_ACCOUNT_NAME
     valueFrom:
       secretKeyRef:
@@ -123,7 +122,6 @@ env:
       secretKeyRef:
         name: aawdevcc00samgpremium
         key: azurestorageaccountkey 
-
   - name: BLOB_PROB_ACCOUNT_NAME
     valueFrom:
       secretKeyRef:
