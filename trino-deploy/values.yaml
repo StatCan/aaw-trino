@@ -81,8 +81,6 @@ additionalCatalogs:
     hive.security=FILE
     security.config-file=/etc/catalog/rules.json
     security.refresh-period=1s
-    hive.azure.wasb-storage-account=${ENV:BLOB_STANDARD_ACCOUNT_NAME}
-    hive.azure.wasb-access-key=${ENV:BLOB_STANDARD_ACCESS_KEY}
     hive.config.resources=/etc/hadoop/conf/core-site.xml
 
 
