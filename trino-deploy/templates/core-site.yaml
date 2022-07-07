@@ -10,7 +10,8 @@ metadata:
     release: trino
     role: catalogs
 data:
-  test: ${ENV:BLOB_STANDARD_ACCOUNT_NAME}
+  test.properties: |
+    test = ${ENV:BLOB_STANDARD_ACCOUNT_NAME}
   core-site.xml: |
     <configuration>
       <property>
