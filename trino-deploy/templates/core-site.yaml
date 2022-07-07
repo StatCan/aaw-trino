@@ -11,7 +11,7 @@ metadata:
     role: catalogs
 data:
   test.properties: |
-    test = ${ENV:BLOB_STANDARD_ACCOUNT_NAME}
+    test=${ENV:BLOB_STANDARD_ACCOUNT_NAME}
   core-site.xml: |
     <configuration>
       <property>
