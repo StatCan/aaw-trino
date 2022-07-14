@@ -25,9 +25,6 @@ spec:
     spec:
       serviceAccountName: {{ include "trino.serviceAccountName" . }}
       volumes:
-        - name: storage-config
-          configMap:
-            name: core-site
         - name: rules-volume
           configMap:
             name: hive-rules
@@ -50,8 +47,6 @@ spec:
           env:
             {{- toYaml .Values.env | nindent 12 }}
           volumeMounts:
-            - mountPath: /etc/hadoop/conf/
-              name: storage-config
             - mountPath: /etc/catalog
               name: rules-volume
             - mountPath: {{ .Values.server.config.path }}
