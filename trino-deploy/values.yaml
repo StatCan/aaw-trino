@@ -67,12 +67,6 @@ nodeAddress:
   - node.internal-address=trino-headless.trino-system.svc.cluster.local
 
 additionalCatalogs:
-  postgresql: |
-    connector.name=postgresql
-    connection-url=jdbc:postgresql://postgresql-datasource.postgresql-datasource:5432/autos
-    connection-user=${ENV:TRINO_USERNAME}
-    connection-password=${ENV:TRINO_PASSWORD}
-
   hive: |
     connector.name=hive
     hive.metastore.uri=thrift://hive-metastore.hive-system:9083
