@@ -68,6 +68,8 @@ spec:
           env:
             {{- toYaml .Values.env | nindent 12 }}
           volumeMounts:
+            - mountPath: /etc/hadoop/conf/
+              name: storage-config
             - mountPath: /etc/catalog
               name: rules-volume
             - mountPath: {{ .Values.server.config.path }}
