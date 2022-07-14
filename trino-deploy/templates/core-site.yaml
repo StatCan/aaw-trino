@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: core-site
+  labels:
+    app: trino
+    app.kubernetes.io/managed-by: Helm
+    chart: trino-0.5.0
+    heritage: Helm
+    release: trino
+    role: catalogs
+data:
+  test.properties: |
+    test=${ENV:BLOB_STANDARD_ACCOUNT_NAME}
+  core-site.xml: |
+    <configuration>
+      <property>
+          <name>fs.azure.account.key.${ENV:BLOB_STANDARD_ACCOUNT_NAME}.blob.core.windows.net</name>
+          <value>${ENV:BLOB_STANDARD_ACCESS_KEY}</value>
+      </property>
+      <property>
+          <name>fs.azure.account.key.${ENV:BLOB_PROB_ACCOUNT_NAME}.blob.core.windows.net</name>
+          <value>${ENV:BLOB_PROB_ACCESS_KEY}</value>
+      </property>
+      <property>
+          <name>fs.azure.account.key.${ENV:BLOB_PREMIUM_ACCOUNT_NAME}.blob.core.windows.net</name>
+          <value>${ENV:BLOB_PREMIUM_ACCESS_KEY}</value>
+      </property>
+    </configuration>
