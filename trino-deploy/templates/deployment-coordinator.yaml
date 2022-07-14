@@ -31,6 +31,9 @@ spec:
         runAsGroup: {{ .runAsGroup }}
       {{- end }}
       volumes:
+        - name: storage-config
+          configMap:
+            name: core-site
         - name: rules-volume
           configMap:
             name: hive-rules
