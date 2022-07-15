@@ -33,7 +33,7 @@ spec:
       volumes:
         - name: storage-config
           secret:
-            secretname: core-site
+            secretName: core-site
         - name: rules-volume
           configMap:
             name: hive-rules
