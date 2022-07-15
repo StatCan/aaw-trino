@@ -77,57 +77,6 @@ additionalCatalogs:
     security.refresh-period=1s
     hive.config.resources=/etc/hadoop/conf/core-site.xml
 
-
-
-# Array of EnvVar (https://v1-18.docs.kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#envvar-v1-core)
-env:
-  - name: TRINO_USERNAME
-    valueFrom:
-      secretKeyRef:
-        name: trino-secret
-        key: user
-  - name: TRINO_PASSWORD
-    valueFrom:
-      secretKeyRef:
-        name: trino-secret
-        key: password
-  - name: TRINO_SHARED_SECRET
-    valueFrom:
-      secretKeyRef:
-        name: trino-shared-secret
-        key: shared-secret
-  - name: BLOB_STANDARD_ACCOUNT_NAME
-    valueFrom:
-      secretKeyRef:
-        name: aawdevcc00samgstandard
-        key: azurestorageaccountname 
-  - name: BLOB_STANDARD_ACCESS_KEY
-    valueFrom:
-      secretKeyRef:
-        name: aawdevcc00samgstandard
-        key: azurestorageaccountkey  
-  - name: BLOB_PREMIUM_ACCOUNT_NAME
-    valueFrom:
-      secretKeyRef:
-        name: aawdevcc00samgpremium
-        key: azurestorageaccountname 
-  - name: BLOB_PREMIUM_ACCESS_KEY
-    valueFrom:
-      secretKeyRef:
-        name: aawdevcc00samgpremium
-        key: azurestorageaccountkey 
-  - name: BLOB_PROB_ACCOUNT_NAME
-    valueFrom:
-      secretKeyRef:
-        name: aawdevcc00samgprotb
-        key: azurestorageaccountname 
-  - name: BLOB_PROB_ACCESS_KEY
-    valueFrom:
-      secretKeyRef:
-        name: aawdevcc00samgprotb
-        key: azurestorageaccountkey 
-
-
 initContainers: {}
   # coordinator:
   #   - name: init-coordinator
