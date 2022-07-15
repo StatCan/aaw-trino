@@ -57,10 +57,12 @@ spec:
       #   configMap:
       #     name: hive-connection
       - name: hive-config
-        projected:
-          sources:
-          - configMap: 
-              name: {{ include "hiveMetastore.fullname" . }}
-          - configMap:
-              name: hive-connection
+        # projected:
+        #   sources:
+        #   - configMap: 
+        #       name: {{ include "hiveMetastore.fullname" . }}
+        #   - configMap:
+        #       name: hive-connection
+        secret:
+          secretName: hive-metastore
               
