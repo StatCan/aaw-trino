@@ -95,6 +95,15 @@ securityContext:
   runAsUser: 1000
   runAsGroup: 1000
 
+
+# Array of EnvVar (https://v1-18.docs.kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#envvar-v1-core)
+env:
+  - name: TRINO_SHARED_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: trino-shared-secret
+        key: shared-secret
+
 service:
   type: ClusterIP
   port: 8080
