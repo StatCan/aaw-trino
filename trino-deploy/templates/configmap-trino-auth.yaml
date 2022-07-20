@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: auth-cm
+  labels:
+    app: trino
+    app.kubernetes.io/managed-by: Helm
+    chart: trino-0.5.0
+    heritage: Helm
+    release: trino
+    role: catalogs
+data:
+    test.properties: |
+        password-authenticator.name=file
+        file.password-file=/etc/trino/catalog

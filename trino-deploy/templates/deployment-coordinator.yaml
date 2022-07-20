@@ -31,6 +31,9 @@ spec:
         runAsGroup: {{ .runAsGroup }}
       {{- end }}
       volumes:
+        - name: trino-auth
+          configMap:
+            name: auth-cm
         - name: storage-config
           secret:
             secretName: core-site
@@ -68,6 +71,9 @@ spec:
           env:
             {{- toYaml .Values.env | nindent 12 }}
           volumeMounts:
+            - mountPath: /etc/password-authenticator.properties
+              subPath: password-authenticator.properties
+              name: trino-auth
             - mountPath: /etc/hadoop/conf/
               name: storage-config
             - mountPath: /etc/catalog
