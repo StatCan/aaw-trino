@@ -26,8 +26,8 @@ spec:
       serviceAccountName: {{ include "trino.serviceAccountName" . }}
       volumes:
         - name: storage-config
-          configMap:
-            name: core-site
+          secret:
+            secretName: core-site
         - name: rules-volume
           configMap:
             name: hive-rules

@@ -75,3 +75,5 @@ data:
     {{ $configValue }}
   {{- end }}
 
+  password.db: |
+    test:$2y$10$PA2oAF8GCJPrSuZQobTLMeizvaO7aj0VhI38sNkCpJLZQKfbaGkqi
