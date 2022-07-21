@@ -12,4 +12,4 @@ metadata:
 data:
     password-authenticator.properties: |
         password-authenticator.name=file
-        file.password-file=/etc/trino/catalog
+        file.password-file=/etc/trino/catalog/password.db

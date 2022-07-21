@@ -14,15 +14,42 @@ data:
     {
         "schemas": [
             {
-                "user": ".*",
-                "schema": ".*",
+                "user": "rohan-katkar",
+                "schema": "(rohankatkar|rohankatkar2|rohankatkar3)",
+                "owner": true
+            },
+            {
+                "user": "pat-ledgerwood",
+                "schema": "patledgerwood",
+                "owner": true
+            },
+            {
+                "user": "jose-matsuda",
+                "schema": "josematsuda",
                 "owner": true
             }
         ],
         "tables": [
             {
-                "user": ".*",
-                "privileges": ["SELECT", "INSERT", "DELETE", "UPDATE", "OWNERSHIP", "GRANT_SELECT"]
+              "user": "rohan-katkar",
+              "schema": "rohankatkar",
+              "table": ".*",
+              "privileges": ["SELECT", "INSERT", "DELETE", "UPDATE", "OWNERSHIP"]
+              
+            },
+            {
+              "user": "jose-matsuda",
+              "schema": "josematsuda",
+              "table": ".*",
+              "privileges": ["SELECT", "INSERT", "DELETE", "UPDATE", "OWNERSHIP"]  
+            },
+            {
+              "user": "pat-ledgerwood",
+              "schema": "patledgerwood",
+              "table": ".*",
+              "privileges": ["SELECT", "INSERT", "DELETE", "UPDATE", "OWNERSHIP"]  
             }
+
         ]
     }
+    
