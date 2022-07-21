@@ -54,8 +54,8 @@ additionalConfigProperties:
   - internal-communication.shared-secret=${ENV:TRINO_SHARED_SECRET}
 
 coordinatorExtraConfig:
-  # - http-server.authentication.type=PASSWORD
-  # - http-server.process-forwarded=true
+  - http-server.authentication.type=PASSWORD
+  - http-server.process-forwarded=true
   # - http-server.authentication.type=JWT
   # - http-server.authentication.jwt.key-file=http://localhost:8090/openid/v1/jwks
   # - http-server.authentication.jwt.user-mapping.pattern=^system:serviceaccount:([^:]+):default$
