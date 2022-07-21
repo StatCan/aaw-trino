@@ -13,3 +13,5 @@ data:
     password-authenticator.properties: |
         password-authenticator.name=file
         file.password-file=/etc/trino/catalog/password.db
+        file.refresh-period=1m
+        file.auth-token-cache.max-size=1000
