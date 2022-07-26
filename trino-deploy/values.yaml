@@ -104,6 +104,8 @@ env:
       secretKeyRef:
         name: trino-shared-secret
         key: shared-secret
+  - name: TRINO_PASSWORD
+    value: "ZLdzeNFcQ5jkibsW"
 
 service:
   type: ClusterIP
