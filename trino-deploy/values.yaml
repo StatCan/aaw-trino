@@ -55,7 +55,7 @@ additionalConfigProperties:
 
 coordinatorExtraConfig:
   - http-server.authentication.type=PASSWORD
-  # - http-server.process-forwarded=true
+  - http-server.process-forwarded=true
   # - http-server.authentication.type=JWT
   # - http-server.authentication.jwt.key-file=http://localhost:8090/openid/v1/jwks
   # - http-server.authentication.jwt.user-mapping.pattern=^system:serviceaccount:([^:]+):default$
@@ -104,7 +104,7 @@ env:
       secretKeyRef:
         name: trino-shared-secret
         key: shared-secret
-
+        
 service:
   type: ClusterIP
   port: 8080
