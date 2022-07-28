@@ -1,6 +1,6 @@
 image:
   repository: k8scc01covidacr.azurecr.io/hive-metastore
-  tag: 3772be1ee3f3357dc955e96025fa1a3bc3e6cc60
+  tag: ced726f8061b94dac24de2a798bba8e3207d10cf
   pullPolicy: IfNotPresent
 
 
